@@ -1,5 +1,6 @@
 package com.DB.orderScheduler.repositories;
 
+import com.DB.orderScheduler.dto.UserDTO;
 import com.DB.orderScheduler.models.UserModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends BaseRepository<UserModel, Long> {
@@ -18,9 +20,12 @@ public interface UserRepository extends BaseRepository<UserModel, Long> {
     @Query(value = "SELECT u FROM user u WHERE u.nombre LIKE %:filter%")
     Page<UserModel> search(@Param("filter") String filter, Pageable pageable);
 
+    @Query(value = "SELECT u FROM user u WHERE u.mail LIKE %:mail%")
+    Optional<UserModel> findByEmail(@Param("mail") String email);
+
     @Query(value = "SELECT u FROM user WHERE u.id = %:filter%")
     UserModel searchById(@Param("filter") Long filter);
 
-    @Query
-    UserModel registerUser(@Param("usuario") UserModel userModel);
+    @Query(value = "ADD %:usuario%")
+    UserModel addUser(@Param("usuario")UserDTO userDTO);
 }

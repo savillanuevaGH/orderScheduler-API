@@ -1,11 +1,14 @@
 package com.DB.orderScheduler.services;
 
+import com.DB.orderScheduler.dto.UserDTO;
 import com.DB.orderScheduler.models.UserModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface UserService extends BaseService<UserModel, Long> {
@@ -14,7 +17,11 @@ public interface UserService extends BaseService<UserModel, Long> {
 
     Page<UserModel> search(String filter, Pageable pageable) throws Exception;
 
+    Optional<UserModel> findByEmail(String email) throws Exception;
+
     UserModel searchById(Long filter) throws Exception;
 
-    UserModel registerUser(UserModel userModel) throws IllegalArgumentException;
+    UserModel addUser(UserDTO userDTO);
+
+    UserDTO convertToDTO(UserModel userModel) throws Exception;
 }

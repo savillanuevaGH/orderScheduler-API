@@ -1,5 +1,7 @@
 package com.DB.orderScheduler.controllers;
 
+import com.DB.orderScheduler.dto.UserDTO;
+import com.DB.orderScheduler.models.RoleType;
 import com.DB.orderScheduler.models.UserModel;
 import com.DB.orderScheduler.services.impl.UserServiceImpl;
 import org.springframework.data.domain.Pageable;
@@ -31,19 +33,30 @@ public class UserController extends BaseControllerImpl<UserModel, UserServiceImp
     }
 
     @GetMapping("/search/{id}")
-    public ResponseEntity<?> searchById(@PathVariable Long filter) {
+    public ResponseEntity<?> searchById(@PathVariable Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.searchById(filter));
+            return ResponseEntity.status(HttpStatus.OK).body(service.searchById(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
         }
     }
 
-    @PutMapping("/add")
-    public ResponseEntity<?> registerUser(@RequestBody UserModel userModel) {
+    @PostMapping("/add")
+    public ResponseEntity<?> addUser(@RequestBody UserDTO userDTO) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.registerUser(userModel));
+            UserModel userModel = service.addUser(userDTO);
+            UserDTO resultDTO = service.convertToDTO(userModel);
+           return ResponseEntity.ok(resultDTO);
         } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
+        }
+    }
+
+    @PostMapping("/{email}/addRole")
+    public ResponseEntity<?> addRoleToUser(@PathVariable String email, @RequestParam RoleType role) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.addRoleToUser(email, role));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
         }
     }

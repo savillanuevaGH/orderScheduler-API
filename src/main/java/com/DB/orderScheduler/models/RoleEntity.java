@@ -8,12 +8,9 @@ import lombok.Setter;
 @Table(name = "role")
 @Getter
 @Setter
-public class RoleEntity {
+public class RoleEntity extends BaseModel{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private String type;
+    private RoleType type;
 }
