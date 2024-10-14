@@ -1,6 +1,7 @@
 package com.DB.orderScheduler.repositories;
 
 import com.DB.orderScheduler.models.OrderModel;
+import com.DB.orderScheduler.models.UserModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,7 @@ public interface OrderRepository extends BaseRepository<OrderModel, Long> {
 
     @Query(value = "SELECT u FROM User WHERE u.id = %:filter%")
     OrderModel searchById(@Param("filter") Long filter);
+
+    @Query(value = "SELECT u FROM user u WHERE u.id = %:filter%")
+    List<UserModel> searchByUserId(@Param("filter") Long filter);
 }

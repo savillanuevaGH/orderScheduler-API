@@ -20,10 +20,10 @@ import java.util.Set;
 public class UserServiceImpl extends BaseServiceImpl<UserModel, Long> implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    protected UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    protected RoleRepository roleRepository;
 
     @Override
     public List<UserModel> search(String filter) throws Exception {

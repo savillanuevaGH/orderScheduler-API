@@ -13,7 +13,7 @@ import java.util.List;
 public class PlateServiceImpl extends BaseServiceImpl<PlateModel, Long> implements PlateService {
 
     @Autowired
-    private PlateRepository plateRepository;
+    protected PlateRepository plateRepository;
 
     @Override
     public List<PlateModel> search(String filter) throws Exception {

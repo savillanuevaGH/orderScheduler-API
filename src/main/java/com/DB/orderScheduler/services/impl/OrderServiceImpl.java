@@ -1,6 +1,7 @@
 package com.DB.orderScheduler.services.impl;
 
 import com.DB.orderScheduler.models.OrderModel;
+import com.DB.orderScheduler.models.UserModel;
 import com.DB.orderScheduler.repositories.OrderRepository;
 import com.DB.orderScheduler.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 public class OrderServiceImpl extends BaseServiceImpl<OrderModel, Long> implements OrderService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    protected OrderRepository orderRepository;
 
     @Override
     public List<OrderModel> search(String filter) throws Exception {
@@ -39,6 +40,16 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderModel, Long> implemen
         try {
             OrderModel orderSearched = orderRepository.searchById(filter);
             return orderSearched;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<UserModel> findByUserId(Long userId) throws Exception {
+        try {
+            List<UserModel> orderModelsSearch = orderRepository.searchByUserId(userId);
+            return orderModelsSearch;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

@@ -12,7 +12,7 @@ import java.util.List;
 public class MenuServiceImpl extends BaseServiceImpl<MenuModel, Long> implements MenuService {
 
     @Autowired
-    private MenuRepository menuRepository;
+    protected MenuRepository menuRepository;
 
     @Override
     public List<MenuModel> search(String filter) throws Exception {

@@ -38,4 +38,13 @@ public class OrderController extends BaseControllerImpl<OrderModel, OrderService
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
         }
     }
+
+    @GetMapping("/search/user/{id}")
+    public ResponseEntity<?> findByUserId(@RequestParam @PathVariable Long filter) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.findByUserId(filter));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
+        }
+    }
 }
