@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,4 +18,6 @@ public interface PlateService extends BaseService<PlateModel, Long> {
     PlateModel searchById(Long filter) throws Exception;
 
     List<PlateModel> findByCategory(Enum<?> filter) throws Exception;
+
+    List<PlateModel> findByDay(LocalDate filter) throws Exception;
 }

@@ -41,6 +41,15 @@ public class UserController extends BaseControllerImpl<UserModel, UserServiceImp
         }
     }
 
+    @GetMapping("/search/{email}")
+    public ResponseEntity<?> findByEmail(@PathVariable String email) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.findByEmail(email));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
+        }
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addUser(@RequestBody UserDTO userDTO) {
         try {

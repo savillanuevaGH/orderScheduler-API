@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class PlateServiceImpl extends BaseServiceImpl<PlateModel, Long> implements PlateService {
@@ -45,6 +46,15 @@ public class PlateServiceImpl extends BaseServiceImpl<PlateModel, Long> implemen
     public List<PlateModel> findByCategory(Enum<?> filter) throws Exception {
         try {
             return plateRepository.findByCategory(filter);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<PlateModel> findByDay(LocalDate filter) throws Exception {
+        try {
+            return plateRepository.findByDay(filter);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

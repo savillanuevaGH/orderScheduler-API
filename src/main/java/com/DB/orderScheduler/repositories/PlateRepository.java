@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PlateRepository extends BaseRepository<PlateModel, Long> {
@@ -21,4 +22,7 @@ public interface PlateRepository extends BaseRepository<PlateModel, Long> {
 
     @Query(value = "SELECT P FROM plate WHERE p.category LIKE %:filter%")
     List<PlateModel> findByCategory(@Param("filter") Enum<?> filter);
+
+    @Query(value = "SELECT p FROM plate p WHERE p.day LIKE %:filter%")
+    List<PlateModel> findByDay(@Param("filter") LocalDate filter);
 }
