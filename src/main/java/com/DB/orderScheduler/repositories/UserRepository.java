@@ -28,4 +28,7 @@ public interface UserRepository extends BaseRepository<UserModel, Long> {
 
     @Query(value = "ADD %:usuario%")
     UserModel addUser(@Param("usuario")UserDTO userDTO);
+
+    @Query(value = "DELETE u FROM user u WHERE u.email LIKE %:email_user%")
+    UserModel deleteUser(@Param(value = "email_user") String userEmail);
 }

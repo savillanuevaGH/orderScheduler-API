@@ -114,4 +114,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserModel, Long> implements
 
         return userDTO;
     }
+
+    @Override
+    public UserModel deleteUser(UserModel userModel) throws Exception {
+        try {
+            Optional<UserModel> userOptional = userRepository.findByEmail(userModel.getEmail());
+            if (!userOptional.isPresent()) {
+                throw new IllegalArgumentException("Usuario no encontrado");
+            }
+            UserModel user = userOptional.get();
+            userRepository.delete(user);
+            return user;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

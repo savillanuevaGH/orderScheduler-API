@@ -69,4 +69,13 @@ public class UserController extends BaseControllerImpl<UserModel, UserServiceImp
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
         }
     }
+
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<?> deleteUser(@RequestBody UserModel userModel) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.deleteUser(userModel));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(("{\"Error\": \"" + e.getMessage() + "\"}"));
+        }
+    }
 }

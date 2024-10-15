@@ -4,7 +4,6 @@ import com.DB.orderScheduler.dto.UserDTO;
 import com.DB.orderScheduler.models.UserModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,4 +23,6 @@ public interface UserService extends BaseService<UserModel, Long> {
     UserModel addUser(UserDTO userDTO);
 
     UserDTO convertToDTO(UserModel userModel) throws Exception;
+
+    UserModel deleteUser(UserModel userModel) throws Exception;
 }
