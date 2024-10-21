@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "plate")
@@ -29,7 +29,7 @@ public class PlateModel extends BaseModel {
     private String comment;
 
     @OneToMany(mappedBy = "plate", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderPlate> orderPlates;
+    private List<OrderPlate> orderPlates;
 
     @ManyToOne()
     @JoinTable(
@@ -37,5 +37,5 @@ public class PlateModel extends BaseModel {
             joinColumns = @JoinColumn(name = "plate_id"),
             inverseJoinColumns = @JoinColumn(name = "menu_id")
     )
-    private Set<UserModel> user;
+    private UserModel user;
 }

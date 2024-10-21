@@ -25,7 +25,7 @@ public class UserModel extends BaseModel {
     private String lastName;
     @Column(name = "fechaBaja")
     private LocalDate dischargeDate;
-    @Column(name = "dni",unique = true, nullable = false)
+    @Column(name = "dni", unique = true, nullable = false)
     private int dni;
     @Column(name = "contrasena", nullable = false)
     private String password;

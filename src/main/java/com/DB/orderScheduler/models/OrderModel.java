@@ -22,6 +22,6 @@ public class OrderModel extends BaseModel{
     @Column(name = "fecha_baja")
     private LocalDate dischargeDate;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private UserModel userModel;
 }

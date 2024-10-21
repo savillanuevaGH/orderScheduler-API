@@ -19,13 +19,13 @@ public class MenuModel extends BaseModel {
     @Column(name = "fecha_baja")
     private LocalDate dischargeDate;
 
-    @OneToMany
+    @OneToOne
     @JoinTable(
             name = "menu_plate",
             joinColumns = @JoinColumn(name = "menu_id"),
-            inverseJoinColumns = @JoinColumn(name = "plate_id")
+            inverseJoinColumns = @JoinColumn(name = "menu_plate_id")
     )
-    private PlateModel plate;
+    private MenuPlate menuPlate;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinTable(
