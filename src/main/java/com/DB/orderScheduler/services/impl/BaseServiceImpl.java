@@ -21,7 +21,7 @@ public abstract class BaseServiceImpl<E extends BaseModel, ID extends Serializab
     @Transactional
     public List<E> findAll() throws Exception {
         try{
-            List<E> entities = baseRepository.findAll();
+            List<E> entities = (List<E>) baseRepository.findAll();
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -31,8 +31,7 @@ public abstract class BaseServiceImpl<E extends BaseModel, ID extends Serializab
     @Override
     public Page<E> findAll(Pageable pageable) throws Exception {
         try{
-            Page<E> entities = baseRepository.findAll(pageable);
-            return entities;
+            return (Page<E>) baseRepository.findAll(pageable);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

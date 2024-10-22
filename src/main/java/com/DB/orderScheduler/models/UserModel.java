@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -23,8 +24,10 @@ public class UserModel extends BaseModel {
     private String name;
     @Column(name = "apellido")
     private String lastName;
-    @Column(name = "fechaBaja")
+    @Column(name = "fecha_baja")
     private LocalDate dischargeDate;
+    @Column(name = "dias_laborales")
+    private HashMap<Integer, String> workDays;
     @Column(name = "dni", unique = true, nullable = false)
     private int dni;
     @Column(name = "contrasena", nullable = false)
